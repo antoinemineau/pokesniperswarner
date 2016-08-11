@@ -2,10 +2,10 @@
 
 require_once('colors.class.php');
 
-class PokeSniperWarner {
+class PokeSnipersWarner {
 	private $apiUrl = 'http://pokesnipers.com/api/v1/pokemon.json';
 	private $iv = 90;
-	private $timer = 20;
+	private $timer = 15;
 	private $colors;
 
 	public function __construct($iv, $timer)
@@ -28,12 +28,13 @@ class PokeSniperWarner {
 		$results = file_get_contents($this->apiUrl);
 		$json = json_decode($results, true);
 		$found = 0;
+		$time = date('Y-m-d H:i:s');
 
 		if (isset($json['results'])) {
 			foreach ($json['results'] as $row) {
 				if ($row['iv'] >= $this->iv) {
 					$coords = explode(',', $row['coords']);
-					$this->colors->display("/!\\/!\\/!\\/!\\/!\\/!\\ POKEMON FOUND /!\\/!\\/!\\/!\\/!\\/!\\", "white", "blue");
+					$this->colors->display("/!\\/!\\/!\\/!\\/!\\/!\\ POKEMON FOUND - {$time} /!\\/!\\/!\\/!\\/!\\/!\\", "white", "blue");
 					$this->colors->display("{$row['name']} with IV {$row['iv']}", "cyan");
 					$this->colors->display("longitude: {$coords[0]}", "green");
 					$this->colors->display("latitude: {$coords[1]}", "green");
@@ -48,14 +49,14 @@ class PokeSniperWarner {
 			}
 
 			if ($found == 0) {
-				$this->colors->display("No pokemon found with IV {$this->iv} :'(", "white", "red");
+				$this->colors->display("No pokemon found with IV {$this->iv} at {$time} :'(", "white", "red");
 			}
 		} else {
-			$this->writer("Impossible to parse the API :'(", "white", "red");
+			$this->writer("Impossible to parse the API at {$time} :'(", "white", "red");
 		}
 	}
 }
 
-$pokeSniperWarner = new PokeSniperWarner($argv[1], $argv[2]);
-$pokeSniperWarner->loop();
+$pokeSnipersWarner = new PokeSnipersWarner($argv[1], $argv[2]);
+$pokeSnipersWarner->loop();
 ?>
