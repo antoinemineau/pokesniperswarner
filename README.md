@@ -1,7 +1,7 @@
 # PokeSnipersWarner
 Php class that calls http://pokesnipers.com API and warns you when finding powerful pokemons :
 
-![PokeSnipersWarner screenshot](https://raw.githubusercontent.com/antoinemineau/pokesniperswarner/master/screenshot.png)
+![PokeSnipersWarner screenshot](https://raw.githubusercontent.com/antoinemineau/pokesniperswarner/master/examples/screenshot.png)
 
 
 Launch
