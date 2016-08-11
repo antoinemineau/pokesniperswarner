@@ -6,6 +6,7 @@ class PokeSnipersWarner {
 	private $apiUrl = 'http://pokesnipers.com/api/v1/pokemon.json';
 	private $iv = 90;
 	private $timer = 15;
+	private $beepCount = 5;
 	private $pokemonFound = array();
 
 	public function __construct($iv, $timer)
@@ -20,6 +21,13 @@ class PokeSnipersWarner {
 		while (true) {
 			$this->call();
 			sleep($this->timer);
+		}
+	}
+
+	private function beep()
+	{
+		for ($x = 0; $x != $this->beepCount; $x++) {
+			echo "\x07";
 		}
 	}
 
@@ -51,6 +59,8 @@ class PokeSnipersWarner {
 
 			if ($found == 0) {
 				$this->colors->display("No pokemon found with IV {$this->iv} at {$time} :'(", "white", "red");
+			} else {
+				$this->beep();
 			}
 		} else {
 			$this->writer("Impossible to parse the API at {$time} :'(", "white", "red");

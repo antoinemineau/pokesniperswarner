@@ -1,5 +1,7 @@
 # PokeSnipersWarner
-Php class that calls http://pokesnipers.com API and warns you when finding powerful pokemons :
+Php class that calls http://pokesnipers.com API and warns you when finding powerful pokemons.
+
+It will beep 5 times when pokemons matching your IV is found.
 
 ![PokeSnipersWarner screenshot](https://raw.githubusercontent.com/antoinemineau/pokesniperswarner/master/examples/screenshot.png)
 
