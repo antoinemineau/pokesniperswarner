@@ -6,7 +6,7 @@ class PokeSnipersWarner {
 	private $apiUrl = 'http://pokesnipers.com/api/v1/pokemon.json';
 	private $iv = 90;
 	private $timer = 15;
-	private $colors;
+	private $pokemonFound = array();
 
 	public function __construct($iv, $timer)
 	{
@@ -32,7 +32,8 @@ class PokeSnipersWarner {
 
 		if (isset($json['results'])) {
 			foreach ($json['results'] as $row) {
-				if ($row['iv'] >= $this->iv) {
+				if ($row['iv'] >= $this->iv && !in_array($row['id'], $this->pokemonFound)) {
+					$this->pokemonFound[] = $row['id'];
 					$coords = explode(',', $row['coords']);
 					$this->colors->display("/!\\/!\\/!\\/!\\/!\\/!\\ POKEMON FOUND - {$time} /!\\/!\\/!\\/!\\/!\\/!\\", "white", "blue");
 					$this->colors->display("{$row['name']} with IV {$row['iv']}", "cyan");
